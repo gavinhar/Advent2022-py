@@ -33,7 +33,6 @@ def process_alt(f: IO) -> None:
     # calculate sum of directory with size < 100000
     # and print result for part 1
     part1 = sum(filter(lambda x: x <= 100000, dir_sizes.values()))
-    assert part1 == 1743217
     print('part 1:', part1)
 
     # how much space must be freed to have 30,000,000 free (assuming 70,000,000 total storage)
@@ -42,7 +41,6 @@ def process_alt(f: IO) -> None:
     # find directory with min size > must_free
     # and print result for part 2
     part2 = min(filter(lambda x: x > must_free, dir_sizes.values()))
-    assert part2 == 8319096
     print('part 2:', part2)
 
 
