@@ -39,9 +39,7 @@ for r in range(0, len(grid)):
         scenic_score = max(scenic_score, reduce(lambda a, b: a * visible_trees(b, v), directions, 1))
 
 # print part 1 answer
-assert 1792 == count
 print(count)
 
 # print part 2 answer
-assert 334880 == scenic_score
 print(scenic_score)
