@@ -29,8 +29,5 @@ for line in f:
         part1_visited.add(tuple(rope[1]))
         part2_visited.add(tuple(rope[9]))
 
-assert 5874 == len(part1_visited)
 print(len(part1_visited))
-
-assert 2467 == len(part2_visited)
 print(len(part2_visited))
