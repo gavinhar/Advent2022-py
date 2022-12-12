@@ -1,12 +1,9 @@
 from functools import reduce
 
-# f = open('../input/day10.txt')
-f = open('../input/day10.txt')
-
 # calculate value of x during each cycle
 x = 1
 xs = []
-for line in f:
+for line in open('../input/day10.txt'):
     xs.append(x)
     if line.strip() != 'noop':
         xs.append(x)
