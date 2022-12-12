@@ -3,11 +3,12 @@ from functools import reduce
 # calculate value of x during each cycle
 x = 1
 xs = []
-for line in open('../input/day10.txt'):
-    xs.append(x)
-    if line.strip() != 'noop':
+with open('../input/day10.txt') as f:
+    for line in f:
         xs.append(x)
-        x += int(line.strip().split(' ')[1])
+        if line.strip() != 'noop':
+            xs.append(x)
+            x += int(line.strip().split(' ')[1])
 
 # part 1
 indexes = [20, 60, 100, 140, 180, 220]
