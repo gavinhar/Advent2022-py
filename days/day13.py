@@ -86,6 +86,7 @@ def solution(f: IO) -> int:
 with open('../input/day13-sample.txt') as f:
     part1, part2 = solution(f)
     assert part1 == 13
+    assert part2 == 140
     print(part1)
     print(part2)
     print()
