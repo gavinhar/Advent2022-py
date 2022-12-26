@@ -62,7 +62,7 @@ def solution(f: IO, y: int, m: int) -> Tuple[int, int]:
     return empty, part2
 
 
-with open('../input/day15-sample.txt') as f:
+with open('../sample/day15.txt') as f:
     part1, part2 = solution(f, 10, 20)
     assert part1 == 26
     assert part2 == 56000011

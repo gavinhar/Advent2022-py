@@ -100,7 +100,7 @@ def solution(f: IO) -> Tuple[int, int]:
     return i, count(chart2)
 
 
-with open('../input/day14-sample.txt') as f:
+with open('../sample/day14.txt') as f:
     part1, part2 = solution(f)
     assert part1 == 24
     assert part2 == 93

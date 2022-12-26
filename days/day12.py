@@ -59,10 +59,10 @@ def solution(input: IO, part2: bool):
             todo.append(((x, y + 1), steps + 1))
 
 
-with open('../input/day12-sample.txt') as f:
+with open('../sample/day12.txt') as f:
     print(solution(f, False))
 
-with open('../input/day12-sample.txt') as f:
+with open('../sample/day12.txt') as f:
     print(solution(f, True))
 
 with open('../input/day12.txt') as f:

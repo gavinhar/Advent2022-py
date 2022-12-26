@@ -83,7 +83,7 @@ def solution(f: IO) -> int:
             return total, (packets.index([[2]]) + 1) * (packets.index([[6]]) + 1)
 
 
-with open('../input/day13-sample.txt') as f:
+with open('../sample/day13.txt') as f:
     part1, part2 = solution(f)
     assert part1 == 13
     assert part2 == 140
