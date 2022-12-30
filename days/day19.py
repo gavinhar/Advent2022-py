@@ -1,5 +1,5 @@
 import heapq
-from typing import IO, Tuple
+from typing import IO
 
 
 class Costs:
