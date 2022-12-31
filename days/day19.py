@@ -1,5 +1,5 @@
 import heapq
-from typing import IO, Tuple
+from typing import IO
 
 
 class Costs:
@@ -106,7 +106,7 @@ class Context:
 def calc(costs: Costs, ctx: Context):
     heap = [ctx]
     rv = 0
-    visited = set()
+    visited = {ctx}
 
     last_est = 1_000_000
     while True:
@@ -118,7 +118,6 @@ def calc(costs: Costs, ctx: Context):
 
         if curr.time == 0:
             rv = max(rv, curr.geodes)
-            print(f'rv: {rv} ({last_est})')
             continue
 
         if curr.estimate() <= rv:
@@ -130,60 +129,82 @@ def calc(costs: Costs, ctx: Context):
 
         if new_ctx.time == 0:
             rv = max(rv, new_ctx.geodes)
-            print(f'rv: {rv} ({last_est})')
             continue
 
         if new_ctx not in visited:
+            visited.add(new_ctx)
             heapq.heappush(heap, new_ctx)
 
         if curr.ore >= costs.ore_bot_cost:
             new_with_ore = new_ctx.add_ore_bot(costs)
             if new_with_ore not in visited:
+                visited.add(new_with_ore)
                 heapq.heappush(heap, new_with_ore)
 
         if curr.ore >= costs.clay_bot_cost:
             new_with_clay = new_ctx.add_clay_bot(costs)
             if new_with_clay not in visited:
+                visited.add(new_with_clay)
                 heapq.heappush(heap, new_with_clay)
 
         if curr.ore >= costs.obsidian_bot_ore and curr.clay >= costs.obsidian_bot_clay:
             new_with_obs = new_ctx.add_obsidian_bot(costs)
             if new_with_obs not in visited:
+                visited.add(new_with_obs)
                 heapq.heappush(heap, new_with_obs)
 
         if curr.ore >= costs.geode_bot_ore and curr.obsidian >= costs.geode_bot_obsidian:
             new_with_geode = new_ctx.add_geode_bot(costs)
             if new_with_geode not in visited:
+                visited.add(new_with_geode)
                 heapq.heappush(heap, new_with_geode)
 
 
-def solution(f: IO) -> Tuple[int, int]:
+def solution(f: IO) -> int:
     blueprints = []
     for line1 in f:
         line = line1.strip().split(' ')
         # n = int(line[1][:-1])
         blueprints.append(Costs(line))
 
-    part1 = 0
+    rv = 0
     for i in range(0, len(blueprints)):
         n = i + 1
         print('start', n)
         max_n = calc(blueprints[i], Context())
-        part1 += n * max_n
+        rv += n * max_n
         print('max', n, ':', max_n)
 
-    return part1, 0
+    return rv
 
 
-with open('../sample/day19.txt') as f:
-    part1, part2 = solution(f)
-    assert part1 == 33
-    print('part1', part1)
-    print('part2', part2)
-    print()
+def solution2(f: IO) -> int:
+    blueprints = []
+    for line1 in f:
+        line = line1.strip().split(' ')
+        # n = int(line[1][:-1])
+        blueprints.append(Costs(line))
+
+    rv = 1
+    for i in range(3):
+        ctx = Context()
+        ctx.time = 32
+        rv *= calc(blueprints[i], ctx)
+
+    return rv
+
+
+# with open('../sample/day19.txt') as f:
+#     part1, part2 = solution(f)
+#     assert part1 == 33
+#     print('part1', part1)
+#     print('part2', part2)
+#     print()
+
+# with open('../input/day19.txt') as f:
+#     print('part1', solution2(f))
+
 
 with open('../input/day19.txt') as f:
-    part1, part2 = solution(f)
-    print('part1', part1)
-    print('part2', part2)
+    print('part2', solution2(f))
     print()
